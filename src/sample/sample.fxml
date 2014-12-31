@@ -23,7 +23,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="389.0" prefWidth="373.0">
                      <children>
-                        <Slider layoutX="28.0" layoutY="88.0" orientation="VERTICAL" />
+                        <Slider fx:id="sliderVol" layoutX="28.0" layoutY="88.0" orientation="VERTICAL" />
                         <Label fx:id="headerLabel" layoutX="28.0" layoutY="14.0" text="Volume Control" />
                          <ComboBox id="comboId" fx:id="myComboBox" layoutX="19.0" layoutY="43.0" prefHeight="27.0" prefWidth="102.0" promptText="Select">
 
