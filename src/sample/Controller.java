@@ -28,8 +28,7 @@ public class Controller implements Initializable {
     AudioStreamController handler;
     @FXML
     private Label headerLabel;
-    @FXML
-    private Button myButton;
+
     @FXML
     private ComboBox myComboBox;
     @FXML
@@ -37,15 +36,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        assert myButton != null : "fx:id=\"myButton\" was not injected: check your FXML file 'simple.fxml'.";
-        myButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-
-            }
-        });
-        //printMixersDetails();
         initializeComboBox();
         myComboBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -53,6 +43,7 @@ public class Controller implements Initializable {
                 currentAudioStream = myComboBox.getValue().toString();
                 headerLabel.setText(currentAudioStream);
                 handler = new AudioStreamController(currentAudioStream);
+                sliderVol.setValue(handler.getVolumeControl()*100);
 
 
 
@@ -75,7 +66,7 @@ public class Controller implements Initializable {
         for(int i = 0;i<mixers.length;i++){
             Mixer.Info mixerInfo = mixers[i];
             if(mixerInfo.getVersion().contains("Unknown Version") || mixerInfo.getName().contains("Mic") || mixerInfo.getName().contains("Input")){//gets rid of dummy ports
-                    System.out.println("Useless Port");
+                    //System.out.println("Useless Port");
             }else {
                 Mixer mixer = AudioSystem.getMixer(mixerInfo);
                 System.out.println(mixer.getMixerInfo());
@@ -89,24 +80,5 @@ public class Controller implements Initializable {
 
 
 
-   /* private void getVolumeControl(){//not working yet
-        Port lineIn;
-        Mixer mixer;
-        FloatControl volCtrl;
-        try {
-            mixer = AudioSystem.getMixer(null);
 
-            lineIn = (Port)mixer.getLine(Port.Info.LINE_IN);
-            lineIn.open();
-            volCtrl = (FloatControl) lineIn.getControl(
-
-                    FloatControl.Type.VOLUME);
-
-            // Assuming getControl call succeeds,
-            // we now have our LINE_IN VOLUME control.
-        } catch (Exception e) {
-            System.out.println("Failed trying to find LINE_IN"
-                    + " VOLUME control: exception = " + e);
-        }
-    }*/
 }

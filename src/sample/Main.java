@@ -14,6 +14,12 @@ import java.awt.event.KeyEvent;
 
 public class Main extends Application {
 
+    /*
+    Scrapped this as too much effort with java, switching to c# to do native
+    windows calls(in other words it works but it doesnt because java doesnt
+    have access the win32 api level, without major effort(JNI or JNA))
+     */
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));

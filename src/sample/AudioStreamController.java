@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Slider;
+
 import javax.sound.sampled.*;
 
 /**
@@ -15,7 +18,11 @@ public class AudioStreamController {
     public float Volume = 0;
 
 
+
+
+
     public AudioStreamController(String audioLine) {
+
         System.out.println("In Contructor");
         mixers = AudioSystem.getMixerInfo();
         for(int i = 0; i < mixers.length;i++){
@@ -40,6 +47,7 @@ public class AudioStreamController {
                 if(line.isControlSupported(FloatControl.Type.VOLUME)){
                     control = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
                     System.out.println("Volume:"+control.getValue());
+                    volumeControl = control.getValue();
 
                     // if you want to set the value for the volume 0.5 will be 50%
                     // 0.0 being 0%
@@ -54,12 +62,16 @@ public class AudioStreamController {
 
     }}
 
-        public void setVolume(float v){
-            System.out.print("Setting Volume to: ");
-            System.out.print(v);
-            System.out.println("");
-            control.setValue(v);
+    public float getVolumeControl(){
+        return volumeControl;
+    }
 
+    public void setVolume(float v){
+        System.out.print("Setting Volume: ");
+        System.out.print(v);
+        System.out.println("");
+        volumeControl = v;
+        control.setValue(v);
     }
 }
 
